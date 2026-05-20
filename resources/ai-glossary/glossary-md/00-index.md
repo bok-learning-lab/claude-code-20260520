@@ -93,5 +93,3 @@ If introducing these in sequence rather than by lookup:
 5. [Agent](agent.md) → [Harness](harness.md) → [Model](model.md) → [API](api.md)
    *(forward-looking, for later in the series)*
 
-See also: [outline/00 — Overview](../outline/00-overview.md) ·
-[outline/03 — LLM basics & context](../outline/03-llm-basics-and-context.md).
