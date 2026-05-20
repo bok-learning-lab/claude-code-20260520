@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}} — Marlon Kuzmick</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+{{STYLES}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <span class="author-name">{{AUTHOR}}</span>
+    <div class="header-controls">
+      <button type="button" class="ctrl-btn" id="print-btn">Print</button>
+      <button type="button" class="ctrl-btn" id="copy-btn">Copy MD</button>
+    </div>
+  </header>
+
+  <main class="essay-layout">
+    <article class="essay-content">
+      <h1>{{TITLE}}</h1>
+{{SUBTITLE_BLOCK}}
+{{DATE_BLOCK}}
+{{BODY_HTML}}
+    </article>
+  </main>
+
+  <script type="text/x-markdown-source" id="source-md">{{RAW_MD}}</script>
+
+  <script>
+    (function () {
+      var copyBtn = document.getElementById('copy-btn');
+      var printBtn = document.getElementById('print-btn');
+      var src = document.getElementById('source-md');
+
+      printBtn.addEventListener('click', function () {
+        window.print();
+      });
+
+      copyBtn.addEventListener('click', function () {
+        var text = src.textContent;
+        var done = function () {
+          var prev = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
+          setTimeout(function () { copyBtn.textContent = prev === 'Copied' ? 'Copy MD' : prev; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {
+            fallbackCopy(text); done();
+          });
+        } else {
+          fallbackCopy(text); done();
+        }
+      });
+
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    })();
+  </script>
+</body>
+</html>

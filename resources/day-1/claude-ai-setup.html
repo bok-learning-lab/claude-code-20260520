@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting Started with Claude.ai — Marlon Kuzmick</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+/* Standalone "Deep thoughts" essay styling.
+   Mirrors components/essay-layout.module.css from
+   /Users/mk/Development/ai-enhancement-stories (screen + mobile + print)
+   with the TOC sidebar and footer-links stripped, plus a floating
+   Print/Copy-MD control pair in the header. Light-mode only. */
+
+:root {
+  --bg: rgb(240, 238, 230);
+  --fg: rgb(31, 30, 29);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Newsreader", "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 32px;
+  position: relative;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.author-name {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.header-controls {
+  position: absolute;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  font-family: "Newsreader", "Times New Roman", serif;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.ctrl-btn:hover {
+  opacity: 1;
+}
+
+/* Layout */
+.essay-layout {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  gap: 64px;
+}
+
+/* Main content */
+.essay-content {
+  flex: 1;
+  max-width: 680px;
+}
+
+.essay-content h1 {
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 12px 0;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-style: italic;
+  margin: 0 0 12px 0;
+  opacity: 0.8;
+}
+
+.date {
+  font-size: 16px;
+  margin: 0 0 32px 0;
+  opacity: 0.6;
+}
+
+.essay-content h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 48px 0 16px 0;
+  line-height: 1.3;
+}
+
+.essay-content h3 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 36px 0 12px 0;
+  line-height: 1.3;
+}
+
+.essay-content h4 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 32px 0 12px 0;
+  line-height: 1.3;
+  font-style: italic;
+}
+
+.essay-content p {
+  margin: 0 0 20px 0;
+}
+
+.essay-content em {
+  font-style: italic;
+}
+
+.essay-content strong {
+  font-weight: 600;
+}
+
+.essay-content ul,
+.essay-content ol {
+  margin: 0 0 20px 0;
+  padding-left: 24px;
+}
+
+.essay-content li {
+  margin-bottom: 8px;
+}
+
+.essay-content blockquote {
+  border-left: 3px solid var(--fg);
+  margin: 24px 0;
+  padding: 0 0 0 20px;
+  opacity: 0.85;
+}
+
+.essay-content a {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+.essay-content hr {
+  border: none;
+  border-top: 1px solid rgba(128, 128, 128, 0.3);
+  margin: 40px 0;
+}
+
+.essay-content pre {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+.essay-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+
+.essay-content :not(pre) > code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.essay-content table {
+  border-collapse: collapse;
+  margin: 0 0 20px 0;
+  width: 100%;
+  font-size: 17px;
+}
+
+.essay-content th,
+.essay-content td {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.essay-content th {
+  font-weight: 600;
+}
+
+.essay-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+}
+
+/* Mobile */
+@media (max-width: 860px) {
+  .essay-layout {
+    padding: 32px 20px;
+    gap: 0;
+  }
+
+  .essay-content {
+    max-width: 100%;
+  }
+
+  .essay-content h1 {
+    font-size: 36px;
+  }
+
+  .site-header {
+    padding: 16px 20px;
+  }
+
+  .header-controls {
+    right: 20px;
+    gap: 10px;
+  }
+}
+
+/* Print */
+@media print {
+  @page {
+    margin: 0.75in;
+  }
+
+  body {
+    background: none;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.45;
+    min-height: 0;
+  }
+
+  .site-header,
+  .header-controls {
+    display: none !important;
+  }
+
+  .essay-layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+    gap: 0;
+  }
+
+  .essay-content {
+    max-width: 6.5in;
+    margin: 0 auto;
+  }
+
+  .essay-content h1 {
+    font-size: 22pt;
+    line-height: 1.15;
+    margin: 0 0 6pt 0;
+  }
+
+  .subtitle {
+    font-size: 12pt;
+    margin: 0 0 6pt 0;
+    opacity: 1;
+  }
+
+  .date {
+    font-size: 10pt;
+    margin: 0 0 18pt 0;
+    opacity: 1;
+  }
+
+  .essay-content h2 {
+    font-size: 16pt;
+    margin: 20pt 0 6pt 0;
+    line-height: 1.25;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .essay-content h3 {
+    font-size: 13pt;
+    margin: 16pt 0 4pt 0;
+    line-height: 1.25;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .essay-content h4 {
+    font-size: 12pt;
+    margin: 14pt 0 4pt 0;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .essay-content p {
+    margin: 0 0 8pt 0;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .essay-content ul,
+  .essay-content ol {
+    margin: 0 0 8pt 0;
+  }
+
+  .essay-content li {
+    margin-bottom: 3pt;
+  }
+
+  .essay-content blockquote {
+    margin: 10pt 0;
+    padding-left: 14pt;
+    border-left-color: #000;
+    opacity: 1;
+  }
+
+  .essay-content hr {
+    margin: 18pt 0;
+  }
+
+  .essay-content a {
+    color: #000;
+  }
+}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <span class="author-name">Marlon Kuzmick</span>
+    <div class="header-controls">
+      <button type="button" class="ctrl-btn" id="print-btn">Print</button>
+      <button type="button" class="ctrl-btn" id="copy-btn">Copy MD</button>
+    </div>
+  </header>
+
+  <main class="essay-layout">
+    <article class="essay-content">
+      <h1>Getting Started with Claude.ai</h1>
+      <p class="subtitle">A walk-through for using Claude's browser interface on the HUIT-provided plan, configuring the key settings, and trying one of the activities from the workshop (the interactive population pyramid).</p>
+
+      <hr>
+
+      <h2>1. Confirm you're on the HUIT plan</h2>
+
+      <p>Go to <strong><a href="https://claude.ai">claude.ai</a></strong> and sign in. Check the <strong>bottom-left corner</strong> next to your name for the HUIT-plan indicator (e.g. <strong>"HUIT Early Access"</strong>). If you don't see it, you're on a different account — use the activation link from the pre-workshop HUIT email to switch over. Let us know if the link no longer works.</p>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B4UN3QS7K/screenshot_2026-05-14_at_3.42.14___pm.png?pub_secret=a18a56f681" alt="alt text"></p>
+
+      <blockquote><p><strong>Data sensitivity.</strong> The HUIT-provided plan is temporary, bridging us until Harvard's full Enterprise agreement with Anthropic is in place. Until then, treat it like any other unmanaged cloud tool: public materials, your own notes, and the workshop sample files are fine, but <strong>do not paste student work, grades, research data, or anything above Harvard Level 2 data</strong> into chats. Once the Enterprise agreement lands you'll be able to use it for Level 3 data; we'll let you know when that switches over.</p></blockquote>
+
+      <hr>
+
+      <h2>2. Tour of the interface</h2>
+
+      <p>Once you're signed in, you'll land in a fresh chat. A quick map of what you're looking at:</p>
+
+      <ul>
+        <li><strong>Sidebar (left).</strong> Your past chats. If you only see icons, click the small toggle in the top-left to expand the sidebar.</li>
+        <li><strong>New chat (top-left).</strong> Starts a fresh conversation. Every new chat is a clean slate — Claude doesn't remember the previous chat unless memory is on (more below).</li>
+        <li><strong>Search.</strong> Once you have a few weeks of chats, the search bar near the top of the sidebar becomes essential.</li>
+        <li><strong>Hover on a chat</strong> in the sidebar to get a three-dot menu: <strong>star</strong>, <strong>rename</strong>, <strong>delete</strong>, <strong>move to a project</strong>.</li>
+        <li><strong>Incognito chat.</strong> Top of the chat window — useful for a one-off conversation you don't want saved to history or fed into memory.</li>
+        <li><strong>Projects (sidebar).</strong> Long-running workspaces with their own shared instructions and uploaded files. We'll touch projects more on the Cowork side.</li>
+        <li><strong>Your name (bottom-left)</strong> → <strong>Settings</strong> is where the important toggles live. We'll go there in step 4.</li>
+      </ul>
+
+      <h3>Send a first message</h3>
+
+      <p>Type a sanity-check prompt — something where you know the answer, e.g. <em>"What is the capital of Canada?"</em> — and hit send. If you get a sensible response, your account is wired up correctly.</p>
+
+      <hr>
+
+      <h2>3. Models, and switching between them</h2>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B4UKAJU9F/screenshot_2026-05-19_at_9.29.35___am.png?pub_secret=100780b34a" alt="alt text"></p>
+
+      <p>At the bottom of the chat window, just below the message box, you'll see a model picker. The main three you'll encounter:</p>
+
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Use when</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Opus 4.7</strong></td><td>Hard tasks: long analysis, careful reasoning, complex code, multi-step writing. Most expensive in credits.</td></tr>
+          <tr><td><strong>Sonnet 4.6</strong></td><td>The everyday default. Fast, capable, good for most chats.</td></tr>
+          <tr><td><strong>Haiku 4.5</strong></td><td>Quickest and cheapest. Good for simple lookups, formatting tasks, or chatty back-and-forth.</td></tr>
+        </tbody>
+      </table>
+
+      <p>A useful habit: start in Sonnet, and bump up to Opus when you hit a wall (long reasoning, dense source material, code that has to be right). Your account has finite credits per period.</p>
+
+      <p>You can switch the model mid-conversation — it applies to your next message.</p>
+
+      <hr>
+
+      <h2>4. Settings: turning on memory (optional)</h2>
+
+      <p>Without memory turned on, each new chat is a fresh start: Claude remembers nothing from previous conversations — like the protagonist in <em>Memento</em>, every chat is its own self-contained day. What Claude can see during a chat is the <strong>context window</strong>: the system prompt, any saved memory entries, and the back-and-forth as it accumulates. Turning memory on is what lets information carry from one chat to the next, which is why it's worth understanding before you do.</p>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B5M672GSU/animation.gif?pub_secret=8377dacf99" alt="alt text"></p>
+
+      <p>Click your <strong>name (bottom-left)</strong> → <strong>Settings</strong> → <strong>Capabilities</strong>.</p>
+
+      <p>Look for <strong>"Generate memory from chat history."</strong></p>
+
+      <p><strong>What this does:</strong> at the end of each day, Claude writes a short summary of what you talked about and saves it as plain text. Future chats can read that text, so over time Claude builds up a working picture of who you are, what you work on, and how you like things done.</p>
+
+      <p><strong>What it is:</strong> a text file that gets prepended to your conversations. You can read it, edit individual entries, and delete it. There's no hidden state beyond that.</p>
+
+      <p><strong>Trade-off.</strong> Memory makes Claude more useful over weeks of use, but it does retain notes about you. Until the Harvard Enterprise agreement is in place, only turn it on if you're comfortable with that, and don't discuss sensitive data in memory-enabled chats. You can toggle it off and clear stored memories from the same settings page at any time.</p>
+
+      <p>If you've been using ChatGPT and have memories there you'd like to bring over, scroll down to <strong>"Start import."</strong> It's a copy-paste migration — the prompt it gives you is what you run on the other service to export your memories as text.</p>
+
+      <hr>
+
+      <h2>5. The plus (+) button: attaching context</h2>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B4LKXDY3V/animation_3.gif?pub_secret=625e28a642" alt="alt text"></p>
+
+      <p>Next to the message box is a <strong>+</strong> button. From there you can:</p>
+
+      <ul>
+        <li><strong>Add files or photos.</strong> PDFs, Word docs, CSVs, images, screenshots. Claude reads the contents directly.</li>
+        <li><strong>Web search.</strong> Lets Claude look things up. Use this for anything that happened recently or anything you want a citation for — Claude's training data has a cutoff, so without web search it's working from memory.</li>
+        <li><strong>Add to a project.</strong> Drops this chat into one of your project workspaces.</li>
+      </ul>
+
+      <hr>
+
+      <h2>6. Worked example: build an interactive population pyramid</h2>
+
+      <p>This activity demonstrates <strong>artifacts</strong> — interactive web tools Claude builds inside the chat by writing and running code.</p>
+
+      <p>You'll need the file <code>wpp2024_population_country.csv</code> from the workshop materials folder (<code>claude-cowork-20260518/population-data/</code>).</p>
+
+      <ol>
+        <li>Click <strong>New chat</strong>. Confirm you're on <strong>Opus 4.7</strong> (this one benefits from the stronger model).</li>
+        <li>Click the <strong>+</strong> button → <strong>Add files or photos</strong> → navigate to the CSV and attach it.</li>
+        <li>In the message box, type:
+          <blockquote><p>Can you create an interactive population pyramid as an artifact from the attached CSV data? Please compare Nigeria and Japan.</p></blockquote>
+        </li>
+        <li>Send. Claude will think for a moment, then render an <strong>artifact panel</strong> on the right side of the screen with a live, interactive chart.</li>
+      </ol>
+
+      <p>If the chart isn't quite what you wanted, say so in the next message — for example: <em>"Move youth to the bottom, elderly to the top,"</em> or <em>"Show males and females on opposite sides of a single axis."</em> Claude will rewrite the artifact in place.</p>
+
+      <h3>How this is different from an image-generation model</h3>
+
+      <p>In the workshop we contrasted this with what Midjourney produced when asked for the same comparison. The results were striking — pretty, vaguely chart-shaped artwork — but they weren't population pyramids. There were no real bars tied to real ages and real population counts; just an image that gestured at the idea of a chart about populations. An image model produces pixels that resemble similar images it has seen; it has no representation of Nigeria's actual age distribution, only of what a chart about it tends to look like.</p>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B42LNK00P/process-black_comparison_of_population_pyramids_for_nigeria_a_87465a7f-14fb-41a8-b3ff-6d10fe4c698f_3.png?pub_secret=7c907539d5" alt="alt text"></p>
+
+      <p>What Claude does with an artifact is structurally different. Given the CSV and the request, it writes a small program that reads the data and renders the chart, then runs that program inside the chat. The bars correspond to the real numbers in the file. You can interact with the result, change parameters, and ask Claude to revise it — because the output is code, not a picture.</p>
+
+      <p><img src="https://files.slack.com/files-pri/T0HTW3H0V-F0B4C6G2F7D/screenshot_2026-05-18_at_11.09.07___am.png?pub_secret=a6482e7fc7" alt="alt text"></p>
+
+      <p>This is the broader point about Claude's tool use (running code here; web search and file reading in other situations): the tools let Claude produce outputs that are grounded in something verifiable, rather than predictions of what a plausible answer would look like.</p>
+
+      <p>The basic loop — <strong>context in → operation → output</strong> — is the same one you'll use whether you're making a visualization, drafting a rubric, or organizing files.</p>
+
+      <hr>
+
+      <h2>7. Habits worth building early</h2>
+
+      <ul>
+        <li><strong>One topic per chat.</strong> When you switch tasks, start a new chat. Long unfocused chats accumulate clutter and Claude starts losing the thread (this is called "context rot" — there's a paper in your workshop folder if you're curious).</li>
+        <li><strong>Tell Claude what good looks like.</strong> Instead of <em>"summarize this paper,"</em> try <em>"summarize this paper in three bullets aimed at a sophomore who hasn't taken the prerequisite."</em> The more specific the target, the better the output.</li>
+        <li><strong>Iterate, don't restart.</strong> If the first answer is 70% right, reply with what to change rather than opening a new chat.</li>
+        <li><strong>Web search on by default for current events.</strong> Without it Claude is guessing at anything past its training cutoff.</li>
+      </ul>
+
+      <hr>
+
+      <h2>8. Where to next</h2>
+
+      <p>The browser is where you'll do most of your one-off chats, quick lookups, and artifact-building. When you want Claude to work across a folder of files on your own computer — renaming, reorganizing, summarizing across many documents, generating multiple linked outputs — use the desktop app and Cowork. The guide for that is the second document.</p>
+
+      <p>The interface updates frequently, so exact button placement may shift. The concepts — chats, projects, memory, attachments, artifacts, models — are stable.</p>
+    </article>
+  </main>
+
+  <script type="text/x-markdown-source" id="source-md"># Getting Started with Claude.ai
+
+A walk-through for using Claude's browser interface on the HUIT-provided plan, configuring the key settings, and trying one of the activities from the workshop (the interactive population pyramid).
+
+---
+
+## 1. Confirm you're on the HUIT plan
+
+Go to **[claude.ai](https://claude.ai)** and sign in. Check the **bottom-left corner** next to your name for the HUIT-plan indicator (e.g. **"HUIT Early Access"**). If you don't see it, you're on a different account — use the activation link from the pre-workshop HUIT email to switch over. Let us know if the link no longer works.
+
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B4UN3QS7K/screenshot_2026-05-14_at_3.42.14___pm.png?pub_secret=a18a56f681)
+
+> **Data sensitivity.** The HUIT-provided plan is temporary, bridging us until Harvard's full Enterprise agreement with Anthropic is in place. Until then, treat it like any other unmanaged cloud tool: public materials, your own notes, and the workshop sample files are fine, but **do not paste student work, grades, research data, or anything above Harvard Level 2 data** into chats. Once the Enterprise agreement lands you'll be able to use it for Level 3 data; we'll let you know when that switches over.
+
+---
+
+## 2. Tour of the interface
+
+
+
+Once you're signed in, you'll land in a fresh chat. A quick map of what you're looking at:
+
+- **Sidebar (left).** Your past chats. If you only see icons, click the small toggle in the top-left to expand the sidebar.
+- **New chat (top-left).** Starts a fresh conversation. Every new chat is a clean slate — Claude doesn't remember the previous chat unless memory is on (more below).
+- **Search.** Once you have a few weeks of chats, the search bar near the top of the sidebar becomes essential.
+- **Hover on a chat** in the sidebar to get a three-dot menu: **star**, **rename**, **delete**, **move to a project**.
+- **Incognito chat.** Top of the chat window — useful for a one-off conversation you don't want saved to history or fed into memory.
+- **Projects (sidebar).** Long-running workspaces with their own shared instructions and uploaded files. We'll touch projects more on the Cowork side.
+- **Your name (bottom-left)** → **Settings** is where the important toggles live. We'll go there in step 4.
+
+### Send a first message
+
+Type a sanity-check prompt — something where you know the answer, e.g. *"What is the capital of Canada?"* — and hit send. If you get a sensible response, your account is wired up correctly.
+
+---
+
+## 3. Models, and switching between them
+
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B4UKAJU9F/screenshot_2026-05-19_at_9.29.35___am.png?pub_secret=100780b34a)
+
+At the bottom of the chat window, just below the message box, you'll see a model picker. The main three you'll encounter:
+
+| Model | Use when |
+|---|---|
+| **Opus 4.7** | Hard tasks: long analysis, careful reasoning, complex code, multi-step writing. Most expensive in credits. |
+| **Sonnet 4.6** | The everyday default. Fast, capable, good for most chats. |
+| **Haiku 4.5** | Quickest and cheapest. Good for simple lookups, formatting tasks, or chatty back-and-forth. |
+
+A useful habit: start in Sonnet, and bump up to Opus when you hit a wall (long reasoning, dense source material, code that has to be right). Your account has finite credits per period.
+
+You can switch the model mid-conversation — it applies to your next message.
+
+---
+
+## 4. Settings: turning on memory (optional)
+
+Without memory turned on, each new chat is a fresh start: Claude remembers nothing from previous conversations — like the protagonist in *Memento*, every chat is its own self-contained day. What Claude can see during a chat is the **context window**: the system prompt, any saved memory entries, and the back-and-forth as it accumulates. Turning memory on is what lets information carry from one chat to the next, which is why it's worth understanding before you do.
+
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B5M672GSU/animation.gif?pub_secret=8377dacf99)
+
+Click your **name (bottom-left)** → **Settings** → **Capabilities**.
+
+Look for **"Generate memory from chat history."**
+
+**What this does:** at the end of each day, Claude writes a short summary of what you talked about and saves it as plain text. Future chats can read that text, so over time Claude builds up a working picture of who you are, what you work on, and how you like things done.
+
+**What it is:** a text file that gets prepended to your conversations. You can read it, edit individual entries, and delete it. There's no hidden state beyond that.
+
+**Trade-off.** Memory makes Claude more useful over weeks of use, but it does retain notes about you. Until the Harvard Enterprise agreement is in place, only turn it on if you're comfortable with that, and don't discuss sensitive data in memory-enabled chats. You can toggle it off and clear stored memories from the same settings page at any time.
+
+If you've been using ChatGPT and have memories there you'd like to bring over, scroll down to **"Start import."** It's a copy-paste migration — the prompt it gives you is what you run on the other service to export your memories as text.
+
+---
+
+## 5. The plus (+) button: attaching context
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B4LKXDY3V/animation_3.gif?pub_secret=625e28a642)
+
+Next to the message box is a **+** button. From there you can:
+
+- **Add files or photos.** PDFs, Word docs, CSVs, images, screenshots. Claude reads the contents directly.
+- **Web search.** Lets Claude look things up. Use this for anything that happened recently or anything you want a citation for — Claude's training data has a cutoff, so without web search it's working from memory.
+- **Add to a project.** Drops this chat into one of your project workspaces.
+
+---
+
+## 6. Worked example: build an interactive population pyramid
+This activity demonstrates **artifacts** — interactive web tools Claude builds inside the chat by writing and running code.
+
+You'll need the file `wpp2024_population_country.csv` from the workshop materials folder (`claude-cowork-20260518/population-data/`).
+
+1. Click **New chat**. Confirm you're on **Opus 4.7** (this one benefits from the stronger model).
+2. Click the **+** button → **Add files or photos** → navigate to the CSV and attach it.
+3. In the message box, type:
+   > Can you create an interactive population pyramid as an artifact from the attached CSV data? Please compare Nigeria and Japan.
+4. Send. Claude will think for a moment, then render an **artifact panel** on the right side of the screen with a live, interactive chart.
+
+If the chart isn't quite what you wanted, say so in the next message — for example: *"Move youth to the bottom, elderly to the top,"* or *"Show males and females on opposite sides of a single axis."* Claude will rewrite the artifact in place.
+
+### How this is different from an image-generation model
+
+In the workshop we contrasted this with what Midjourney produced when asked for the same comparison. The results were striking — pretty, vaguely chart-shaped artwork — but they weren't population pyramids. There were no real bars tied to real ages and real population counts; just an image that gestured at the idea of a chart about populations. An image model produces pixels that resemble similar images it has seen; it has no representation of Nigeria's actual age distribution, only of what a chart about it tends to look like.
+
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B42LNK00P/process-black_comparison_of_population_pyramids_for_nigeria_a_87465a7f-14fb-41a8-b3ff-6d10fe4c698f_3.png?pub_secret=7c907539d5)
+
+What Claude does with an artifact is structurally different. Given the CSV and the request, it writes a small program that reads the data and renders the chart, then runs that program inside the chat. The bars correspond to the real numbers in the file. You can interact with the result, change parameters, and ask Claude to revise it — because the output is code, not a picture.
+
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B4C6G2F7D/screenshot_2026-05-18_at_11.09.07___am.png?pub_secret=a6482e7fc7)
+
+This is the broader point about Claude's tool use (running code here; web search and file reading in other situations): the tools let Claude produce outputs that are grounded in something verifiable, rather than predictions of what a plausible answer would look like.
+
+The basic loop — **context in → operation → output** — is the same one you'll use whether you're making a visualization, drafting a rubric, or organizing files.
+
+---
+
+## 7. Habits worth building early
+
+- **One topic per chat.** When you switch tasks, start a new chat. Long unfocused chats accumulate clutter and Claude starts losing the thread (this is called "context rot" — there's a paper in your workshop folder if you're curious).
+- **Tell Claude what good looks like.** Instead of *"summarize this paper,"* try *"summarize this paper in three bullets aimed at a sophomore who hasn't taken the prerequisite."* The more specific the target, the better the output.
+- **Iterate, don't restart.** If the first answer is 70% right, reply with what to change rather than opening a new chat.
+- **Web search on by default for current events.** Without it Claude is guessing at anything past its training cutoff.
+
+---
+
+## 8. Where to next
+
+The browser is where you'll do most of your one-off chats, quick lookups, and artifact-building. When you want Claude to work across a folder of files on your own computer — renaming, reorganizing, summarizing across many documents, generating multiple linked outputs — use the desktop app and Cowork. The guide for that is the second document.
+
+The interface updates frequently, so exact button placement may shift. The concepts — chats, projects, memory, attachments, artifacts, models — are stable.
+</script>
+
+  <script>
+    (function () {
+      var copyBtn = document.getElementById('copy-btn');
+      var printBtn = document.getElementById('print-btn');
+      var src = document.getElementById('source-md');
+
+      printBtn.addEventListener('click', function () {
+        window.print();
+      });
+
+      copyBtn.addEventListener('click', function () {
+        var text = src.textContent;
+        var done = function () {
+          var prev = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
+          setTimeout(function () { copyBtn.textContent = prev === 'Copied' ? 'Copy MD' : prev; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {
+            fallbackCopy(text); done();
+          });
+        } else {
+          fallbackCopy(text); done();
+        }
+      });
+
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    })();
+  </script>
+</body>
+</html>
