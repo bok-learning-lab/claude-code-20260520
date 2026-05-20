@@ -13,8 +13,6 @@ This guide covers the **concepts** and the **shape** of the setup. The exact, co
 
 ## How Claude Code fits with claude.ai and Cowork
 
-![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B566MK17W/screenshot_2026-05-20_at_10.01.35___am.png?pub_secret=30621e0772)
-
 Day 1 used two surfaces. **claude.ai** in the browser is a conversation, plus files you upload, plus artifacts that live inside the chat. **Cowork** in the desktop app is the same conversation, but pointed at a folder on your computer, so Claude can read and — with permission — change real files.
 
 Claude Code is the third door onto the same Claude models. Two things make it different:
