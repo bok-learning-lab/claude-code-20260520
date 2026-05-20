@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rules (.claude/rules/) — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="agents.html">← Prev</a> &nbsp;·&nbsp; <a href="path-specific-rules.html">Next →</a></nav>
+<h1>Rules (<code>.claude/rules/</code>)</h1>
+<blockquote><p><strong>In one line:</strong> Rules are instruction files in <code>.claude/rules/</code> — a way to organize project instructions into separate topic files instead of one long CLAUDE.md.</p></blockquote>
+<p>For larger projects, you can organize instructions into multiple files using the <code>.claude/rules/</code> directory. This keeps instructions modular and easier for teams to maintain.</p>
+<pre><code>your-project/
+├── .claude/
+│   ├── CLAUDE.md           # Main project instructions
+│   └── rules/
+│       ├── code-style.md   # Code style guidelines
+│       ├── testing.md      # Testing conventions
+│       └── security.md     # Security requirements</code></pre>
+<p>Place markdown files in <code>.claude/rules/</code>. Each file should cover one topic, with a descriptive filename. All <code>.md</code> files are discovered recursively, so you can organize rules into subdirectories.</p>
+<p>Rules without a <code>paths</code> field (see below) are loaded at launch alongside CLAUDE.md.</p>
+<p><strong>Rules vs. skills:</strong> Rules load into context every session, or when matching files are opened. For task-specific instructions that don&#x27;t need to be in context all the time, use skills instead — skills only load when you invoke them or when Claude determines they&#x27;re relevant.</p>
+<p><strong>See also:</strong> <a href="claude-md.html">CLAUDE.md</a> · <a href="path-specific-rules.html">Path-Specific Rules</a> · <a href="skills.html">Skills</a></p>
+</main>
+</body>
+</html>

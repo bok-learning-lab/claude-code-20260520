@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common failure patterns to avoid — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="prompt-subagents.html">← Prev</a></nav>
+<h1>Common failure patterns to avoid</h1>
+<p>These are the most common mistakes — recognizing them early saves time.</p>
+<p><strong>The kitchen sink session.</strong> You start with one task, then ask Claude something unrelated, then go back to the first task. Context is full of irrelevant information.</p>
+<blockquote><p>Fix: <code>/clear</code> between unrelated tasks.</p></blockquote>
+<p><strong>Correcting over and over.</strong> Claude does something wrong, you correct it, it&#x27;s still wrong, you correct again. Context is polluted with failed approaches.</p>
+<blockquote><p>Fix: after two failed corrections, <code>/clear</code> and write a better initial prompt incorporating what you learned.</p></blockquote>
+<p><strong>The over-specified CLAUDE.md.</strong> Your CLAUDE.md is too long, so Claude ignores half of it because important rules get lost in the noise.</p>
+<blockquote><p>Fix: ruthlessly prune. If Claude already does something correctly without the instruction, delete it or convert it to a hook.</p></blockquote>
+<p><strong>The trust-then-verify gap.</strong> Claude produces a plausible-looking implementation that doesn&#x27;t handle edge cases.</p>
+<blockquote><p>Fix: always provide verification (tests, scripts, screenshots). If you can&#x27;t verify it, don&#x27;t ship it.</p></blockquote>
+<p><strong>The infinite exploration.</strong> You ask Claude to &quot;investigate&quot; something without scoping it. Claude reads hundreds of files, filling the context.</p>
+<blockquote><p>Fix: scope investigations narrowly or use subagents so the exploration doesn&#x27;t consume your main context.</p></blockquote>
+</main>
+</body>
+</html>

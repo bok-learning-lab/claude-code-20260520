@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference files with @ — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="prompt-specific-context.html">← Prev</a> &nbsp;·&nbsp; <a href="prompt-course-correct.html">Next →</a></nav>
+<h1>Reference files with @</h1>
+<blockquote><p>**Use <code>@</code> to pull files into context directly — Claude reads the file before responding.**</p></blockquote>
+<p>Instead of describing where code lives, use <code>@</code> to reference it:</p>
+<pre><code>look at @src/api/handlers/user.ts and follow the same pattern for a new /orders handler</code></pre>
+<p>You can also:</p>
+<ul><li><strong>Paste images directly</strong> — copy/paste or drag and drop screenshots into the prompt</li><li><strong>Give URLs</strong> for documentation and API references</li><li><strong>Pipe in data</strong> — run <code>cat error.log | claude</code> to send file contents directly</li><li><strong>Let Claude fetch what it needs</strong> — tell Claude to pull context itself using Bash commands, MCP tools, or by reading files</li></ul>
+</main>
+</body>
+</html>

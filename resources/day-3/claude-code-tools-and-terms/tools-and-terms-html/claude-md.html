@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLAUDE.md — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="context-window.html">← Prev</a> &nbsp;·&nbsp; <a href="claude-local-md.html">Next →</a></nav>
+<h1>CLAUDE.md</h1>
+<blockquote><p><strong>In one line:</strong> CLAUDE.md is a special markdown file that Claude reads at the start of every conversation — a place to write down standing instructions so you don&#x27;t have to re-explain them every session.</p></blockquote>
+<p>CLAUDE.md is how you give Claude persistent context. Include Bash commands, code style, and workflow rules. This gives Claude persistent context it can&#x27;t infer from code alone.</p>
+<p>There is no required format for CLAUDE.md files, but keep it short and human-readable. For example:</p>
+<pre><code class="language-markdown"># Code style
+- Use ES modules (import/export) syntax, not CommonJS (require)
+- Destructure imports when possible
+
+# Workflow
+- Be sure to typecheck when you&#x27;re done making a series of code changes
+- Prefer running single tests, not the whole test suite, for performance</code></pre>
+<p><strong>Where to put CLAUDE.md files — each location has a different scope:</strong></p>
+<table><thead><tr><th>Location</th><th>Who sees it</th><th>What it&#x27;s for</th></tr></thead><tbody><tr><td><code>~/.claude/CLAUDE.md</code></td><td>Just you, on all your projects</td><td>Personal preferences across every project</td></tr><tr><td><code>./CLAUDE.md</code> or <code>./.claude/CLAUDE.md</code></td><td>Everyone on the team</td><td>Project conventions — commit this to git</td></tr><tr><td><code>./CLAUDE.local.md</code></td><td>Just you, this project</td><td>Personal project-specific notes — add to <code>.gitignore</code></td></tr><tr><td><code>/Library/Application Support/ClaudeCode/CLAUDE.md</code> (macOS)</td><td>Everyone on the machine</td><td>Organization-wide policies managed by IT</td></tr></tbody></table>
+<p>CLAUDE.md files in parent directories above your working directory are also loaded automatically. Files in subdirectories load on demand when Claude works with files in those directories.</p>
+<p><strong>What to include:</strong></p>
+<table><thead><tr><th>✅ Include</th><th>❌ Exclude</th></tr></thead><tbody><tr><td>Bash commands Claude can&#x27;t guess</td><td>Anything Claude can figure out by reading the code</td></tr><tr><td>Code style rules that differ from defaults</td><td>Standard language conventions Claude already knows</td></tr><tr><td>Testing instructions and preferred test runners</td><td>Detailed API documentation (link to docs instead)</td></tr><tr><td>Architectural decisions specific to your project</td><td>Information that changes frequently</td></tr><tr><td>Common gotchas or non-obvious behaviors</td><td>Long explanations or tutorials</td></tr><tr><td>Developer environment quirks (required env vars)</td><td>File-by-file descriptions of the codebase</td></tr></tbody></table>
+<p><strong>Keep it short.</strong> CLAUDE.md is loaded into the context window at the start of every session, consuming tokens. Target under 200 lines. Longer files reduce adherence — if Claude keeps doing something you don&#x27;t want despite a rule against it, the file may be too long and the rule is getting lost. For each line, ask: <em>&quot;Would removing this cause Claude to make mistakes?&quot;</em> If not, cut it.</p>
+<p><strong>CLAUDE.md can import other files</strong> using <code>@path/to/file</code> syntax:</p>
+<pre><code class="language-markdown">See @README.md for project overview and @package.json for available npm commands.
+
+# Additional Instructions
+- Git workflow: @docs/git-instructions.md</code></pre>
+<p>Imported files are expanded and loaded into context at launch. Use relative or absolute paths.</p>
+<p>Run <code>/init</code> to generate a starter CLAUDE.md automatically — Claude analyzes your codebase and creates a file with build commands, test instructions, and project conventions it discovers.</p>
+<p><strong>See also:</strong> <a href="claude-local-md.html">CLAUDE.local.md</a> · <a href="auto-memory.html">Auto Memory</a> · <a href="rules.html">Rules</a> · <a href="slash-init.html">/init</a> · <a href="slash-memory.html">/memory</a></p>
+</main>
+</body>
+</html>

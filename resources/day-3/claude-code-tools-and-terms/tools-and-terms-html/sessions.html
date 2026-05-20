@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sessions — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="checkpoints.html">← Prev</a> &nbsp;·&nbsp; <a href="slash-init.html">Next →</a></nav>
+<h1>Sessions</h1>
+<blockquote><p><strong>In one line:</strong> Claude Code saves conversations locally so you can pick up exactly where you left off — resume the most recent session with <code>claude --continue</code>, or choose from a list with <code>claude --resume</code>.</p></blockquote>
+<p>Claude Code saves conversations locally, so when a task spans multiple sittings you don&#x27;t have to re-explain the context.</p>
+<pre><code class="language-bash">claude --continue    # pick up the most recent session
+claude --resume      # choose from a list of saved sessions</code></pre>
+<p>Give sessions descriptive names so you can find them later. Run <code>/rename</code> inside a session to name it (e.g. <code>oauth-migration</code>). Treat named sessions like branches — each workstream gets its own persistent context.</p>
+<p><strong>See also:</strong> <a href="slash-rename.html">/rename</a></p>
+</main>
+</body>
+</html>

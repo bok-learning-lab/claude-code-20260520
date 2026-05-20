@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hooks — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="permissions.html">← Prev</a> &nbsp;·&nbsp; <a href="mcp-servers.html">Next →</a></nav>
+<h1>Hooks</h1>
+<blockquote><p><strong>In one line:</strong> Hooks are shell commands that run automatically at specific points in Claude&#x27;s workflow — they&#x27;re deterministic, unlike CLAUDE.md instructions which Claude may or may not follow.</p></blockquote>
+<p>Hooks run scripts automatically at specific points in Claude&#x27;s workflow. Unlike CLAUDE.md instructions which are advisory (Claude reads them and tries to follow them), hooks are deterministic and guarantee the action happens.</p>
+<p>Claude can write hooks for you. Try prompts like:</p>
+<ul><li><em>&quot;Write a hook that runs eslint after every file edit&quot;</em></li><li><em>&quot;Write a hook that blocks writes to the migrations folder.&quot;</em></li></ul>
+<p>Edit <code>.claude/settings.json</code> directly to configure hooks by hand, and run <code>/hooks</code> to browse what&#x27;s configured.</p>
+<p><strong>Hooks vs. CLAUDE.md:</strong> If an instruction is something that must run at a specific point — before every commit, after each file edit — write it as a hook. Hooks execute as shell commands at fixed lifecycle events and apply regardless of what Claude decides to do.</p>
+<p><strong>See also:</strong> <a href="claude-md.html">CLAUDE.md</a></p>
+</main>
+</body>
+</html>

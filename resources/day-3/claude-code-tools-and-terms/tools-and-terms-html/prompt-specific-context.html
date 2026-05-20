@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provide specific context — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="prompt-explore-plan-code.html">← Prev</a> &nbsp;·&nbsp; <a href="prompt-reference-files.html">Next →</a></nav>
+<h1>Provide specific context</h1>
+<blockquote><p><strong>The more precise your instructions, the fewer corrections you&#x27;ll need.</strong> Claude can infer intent, but it can&#x27;t read your mind.</p></blockquote>
+<p>Reference specific files, mention constraints, and point to example patterns.</p>
+<table><thead><tr><th>Strategy</th><th>Before</th><th>After</th></tr></thead><tbody><tr><td><strong>Scope the task</strong></td><td><em>&quot;add tests for foo.py&quot;</em></td><td><em>&quot;write a test for foo.py covering the edge case where the user is logged out. avoid mocks.&quot;</em></td></tr><tr><td><strong>Point to sources</strong></td><td><em>&quot;why does ExecutionFactory have such a weird api?&quot;</em></td><td><em>&quot;look through ExecutionFactory&#x27;s git history and summarize how its api came to be&quot;</em></td></tr><tr><td><strong>Reference existing patterns</strong></td><td><em>&quot;add a calendar widget&quot;</em></td><td><em>&quot;look at how existing widgets are implemented on the home page. HotDogWidget.php is a good example. follow the pattern to implement a new calendar widget that lets the user select a month and paginate forwards/backwards.&quot;</em></td></tr><tr><td><strong>Describe the symptom</strong></td><td><em>&quot;fix the login bug&quot;</em></td><td><em>&quot;users report that login fails after session timeout. check the auth flow in src/auth/, especially token refresh. write a failing test that reproduces the issue, then fix it&quot;</em></td></tr></tbody></table>
+<p>Vague prompts can be useful when you&#x27;re exploring and can afford to course-correct. A prompt like <em>&quot;what would you improve in this file?&quot;</em> can surface things you wouldn&#x27;t have thought to ask about.</p>
+</main>
+</body>
+</html>

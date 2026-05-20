@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan Mode — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="path-specific-rules.html">← Prev</a> &nbsp;·&nbsp; <a href="permissions.html">Next →</a></nav>
+<h1>Plan Mode</h1>
+<blockquote><p><strong>In one line:</strong> Plan mode lets Claude read files and think through a problem without making any changes — you review and approve before anything gets written.</p></blockquote>
+<p>Plan mode separates exploration from execution. Letting Claude jump straight to coding can produce code that solves the wrong problem. Plan mode gives you a chance to check the approach first.</p>
+<p><strong>The recommended four-phase workflow:</strong></p>
+<p><strong>1. Explore</strong> — enter plan mode. Claude reads files and answers questions without making changes.</p>
+<pre><code>read /src/auth and understand how we handle sessions and login.
+also look at how we manage environment variables for secrets.</code></pre>
+<p><strong>2. Plan</strong> — ask Claude to create a detailed implementation plan.</p>
+<pre><code>I want to add Google OAuth. What files need to change?
+What&#x27;s the session flow? Create a plan.</code></pre>
+<p>Press <code>Ctrl+G</code> to open the plan in your text editor for direct editing before Claude proceeds.</p>
+<p><strong>3. Implement</strong> — switch out of plan mode and let Claude code, verifying against its plan.</p>
+<pre><code>implement the OAuth flow from your plan. write tests for the
+callback handler, run the test suite and fix any failures.</code></pre>
+<p><strong>4. Commit</strong> — ask Claude to commit with a descriptive message and create a PR.</p>
+<pre><code>commit with a descriptive message and open a PR</code></pre>
+<p><strong>When to use plan mode:</strong> most useful when you&#x27;re uncertain about the approach, when the change modifies multiple files, or when you&#x27;re unfamiliar with the code being modified. For tasks where the scope is clear and the fix is small (fixing a typo, renaming a variable), ask Claude to do it directly — planning adds overhead that isn&#x27;t always worth it.</p>
+</main>
+</body>
+</html>

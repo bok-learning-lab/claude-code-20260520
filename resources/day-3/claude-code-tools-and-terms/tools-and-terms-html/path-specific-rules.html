@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Path-Specific Rules — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="rules.html">← Prev</a> &nbsp;·&nbsp; <a href="plan-mode.html">Next →</a></nav>
+<h1>Path-Specific Rules</h1>
+<blockquote><p><strong>In one line:</strong> Path-specific rules are rule files with a <code>paths:</code> field in their frontmatter — they only load into context when Claude is working with files matching the specified pattern.</p></blockquote>
+<p>Rules can be scoped to specific files using YAML frontmatter with the <code>paths</code> field. These conditional rules only apply when Claude is working with files matching the specified patterns.</p>
+<pre><code class="language-markdown">---
+paths:
+  - &quot;src/api/**/*.ts&quot;
+---
+
+# API Development Rules
+
+- All API endpoints must include input validation
+- Use the standard error response format
+- Include OpenAPI documentation comments</code></pre>
+<p>Rules without a <code>paths</code> field are loaded unconditionally and apply to all files. Path-scoped rules trigger when Claude reads files matching the pattern — not on every tool use.</p>
+<p><strong>Glob pattern examples:</strong></p>
+<table><thead><tr><th>Pattern</th><th>Matches</th></tr></thead><tbody><tr><td><code>**/*.ts</code></td><td>All TypeScript files in any directory</td></tr><tr><td><code>src/**/*</code></td><td>All files under <code>src/</code></td></tr><tr><td><code>*.md</code></td><td>Markdown files in the project root</td></tr><tr><td><code>src/components/*.tsx</code></td><td>React components in a specific directory</td></tr><tr><td><code>src/**/*.{ts,tsx}</code></td><td>TypeScript and TSX files anywhere under <code>src/</code></td></tr></tbody></table>
+<p><strong>Why this matters:</strong> loading instructions only when relevant keeps the context window lean. If you have 500 lines of API conventions and 500 lines of frontend conventions, there&#x27;s no reason both are in context when you&#x27;re editing a database migration.</p>
+<p><strong>See also:</strong> <a href="rules.html">Rules</a> · <a href="context-window.html">Context Window</a></p>
+</main>
+</body>
+</html>

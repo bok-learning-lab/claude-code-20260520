@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents / Subagents (.claude/agents/) — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="skills.html">← Prev</a> &nbsp;·&nbsp; <a href="rules.html">Next →</a></nav>
+<h1>Agents / Subagents (<code>.claude/agents/</code>)</h1>
+<blockquote><p><strong>In one line:</strong> Subagents are specialized versions of Claude that run in their own context window — Claude can delegate tasks to them so the research or analysis doesn&#x27;t clutter your main conversation.</p></blockquote>
+<p>Subagents run in their own context with their own set of allowed tools. They&#x27;re useful for tasks that read many files or need specialized focus without cluttering your main conversation.</p>
+<pre><code class="language-markdown">&lt;!-- .claude/agents/security-reviewer.md --&gt;
+---
+name: security-reviewer
+description: Reviews code for security vulnerabilities
+tools: Read, Glob, Bash
+model: opus
+---
+You are a senior security engineer. Review code for:
+- Injection vulnerabilities (SQL, XSS, command injection)
+- Authentication and authorization flaws
+- Secrets or credentials in code
+- Insecure data handling
+
+Provide specific line references and suggested fixes.</code></pre>
+<p>Tell Claude to use subagents explicitly: <em>&quot;Use a subagent to review this code for security issues.&quot;</em></p>
+<p><strong>Why subagents matter for context:</strong> since the context window is your fundamental constraint, subagents are one of the most powerful tools available. When Claude researches a codebase it reads lots of files, all of which consume your context. Subagents run in separate context windows and report back summaries — keeping your main conversation clean for implementation.</p>
+<p><strong>Required frontmatter fields:</strong></p>
+<table><thead><tr><th>Field</th><th>Required</th><th>Options</th><th>Notes</th></tr></thead><tbody><tr><td><code>name</code></td><td>Yes</td><td>lowercase, hyphens only</td><td>3–50 characters</td></tr><tr><td><code>description</code></td><td>Yes</td><td>text + <code>&lt;example&gt;</code> blocks</td><td>This is how Claude decides when to use the agent</td></tr><tr><td><code>model</code></td><td>Recommended</td><td><code>inherit</code>, <code>sonnet</code>, <code>opus</code>, <code>haiku</code></td><td><code>inherit</code> uses the same model as the parent</td></tr><tr><td><code>color</code></td><td>Optional</td><td><code>blue</code>, <code>cyan</code>, <code>green</code>, <code>yellow</code>, <code>magenta</code>, <code>red</code></td><td>Visual identifier in the UI</td></tr><tr><td><code>tools</code></td><td>Optional</td><td>array of tool names</td><td>Omit for full access; restrict for least privilege</td></tr></tbody></table>
+<p><strong>See also:</strong> <a href="skills.html">Skills</a> · <a href="context-window.html">Context Window</a> · <a href="prompt-subagents.html">Use subagents for investigation</a></p>
+</main>
+</body>
+</html>

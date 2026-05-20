@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skills (.claude/skills/) — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="auto-memory.html">← Prev</a> &nbsp;·&nbsp; <a href="agents.html">Next →</a></nav>
+<h1>Skills (<code>.claude/skills/</code>)</h1>
+<blockquote><p><strong>In one line:</strong> Skills are reusable workflows and domain knowledge you give Claude — stored in <code>.claude/skills/</code>, each skill is a folder with a SKILL.md file that Claude applies automatically when relevant.</p></blockquote>
+<p>Skills extend Claude&#x27;s knowledge with information specific to your project, team, or domain. Claude applies them automatically when relevant, or you can invoke them directly with <code>/skill-name</code>.</p>
+<p>Create a skill by adding a directory with a <code>SKILL.md</code> to <code>.claude/skills/</code>:</p>
+<pre><code class="language-markdown">&lt;!-- .claude/skills/api-conventions/SKILL.md --&gt;
+---
+name: api-conventions
+description: REST API design conventions for our services
+---
+# API Conventions
+- Use kebab-case for URL paths
+- Use camelCase for JSON properties
+- Always include pagination for list endpoints
+- Version APIs in the URL path (/v1/, /v2/)</code></pre>
+<p>Skills can also define repeatable workflows you invoke directly:</p>
+<pre><code class="language-markdown">&lt;!-- .claude/skills/fix-issue/SKILL.md --&gt;
+---
+name: fix-issue
+description: Fix a GitHub issue
+disable-model-invocation: true
+---
+Analyze and fix the GitHub issue: $ARGUMENTS.
+
+1. Use `gh issue view` to get the issue details
+2. Understand the problem described in the issue
+3. Search the codebase for relevant files
+4. Implement the necessary changes to fix the issue
+5. Write and run tests to verify the fix
+6. Ensure code passes linting and type checking
+7. Create a descriptive commit message
+8. Push and create a PR</code></pre>
+<p>Run <code>/fix-issue 1234</code> to invoke it. Use <code>disable-model-invocation: true</code> for workflows with side effects that you want to trigger manually rather than have Claude invoke automatically.</p>
+<p><strong>Full skill folder structure:</strong></p>
+<pre><code>.claude/skills/
+└── my-skill/
+    ├── SKILL.md           ← required: instructions and trigger description
+    ├── scripts/           ← optional: helper scripts the skill calls
+    ├── references/        ← optional: docs Claude loads into context as needed
+    └── assets/            ← optional: templates, icons, other files</code></pre>
+<p><strong>Skills vs. CLAUDE.md:</strong> CLAUDE.md is loaded into context every session — use it for things that apply broadly. Skills load on demand, keeping every conversation lean. If an instruction is only relevant sometimes, or for a specific task, it belongs in a skill.</p>
+<p><strong>See also:</strong> <a href="claude-md.html">CLAUDE.md</a> · <a href="agents.html">Agents / Subagents</a></p>
+</main>
+</body>
+</html>

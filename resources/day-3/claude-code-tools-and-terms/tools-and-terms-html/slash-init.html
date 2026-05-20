@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/init — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="sessions.html">← Prev</a> &nbsp;·&nbsp; <a href="slash-clear.html">Next →</a></nav>
+<h1>/init</h1>
+<blockquote><p><strong>In one line:</strong> <code>/init</code> generates a starter CLAUDE.md file for your current project by analyzing your codebase.</p></blockquote>
+<p>Running <code>/init</code> makes Claude analyze your project to detect build systems, test frameworks, and code patterns, then creates a CLAUDE.md with build commands, test instructions, and project conventions it discovers.</p>
+<p>If a CLAUDE.md already exists, <code>/init</code> suggests improvements rather than overwriting it.</p>
+<p>Set <code>CLAUDE_CODE_NEW_INIT=1</code> to enable an interactive multi-phase flow. <code>/init</code> asks which artifacts to set up (CLAUDE.md files, skills, hooks), explores your codebase with a subagent, fills in gaps via follow-up questions, and presents a reviewable proposal before writing any files.</p>
+<p><strong>See also:</strong> <a href="claude-md.html">CLAUDE.md</a></p>
+</main>
+</body>
+</html>

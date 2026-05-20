@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context Window — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="claude-code.html">← Prev</a> &nbsp;·&nbsp; <a href="claude-md.html">Next →</a></nav>
+<h1>Context Window</h1>
+<blockquote><p><strong>In one line:</strong> The context window is the fixed amount of text Claude can hold in view at one time — it fills up, and when it does, Claude&#x27;s performance degrades.</p></blockquote>
+<p>Claude&#x27;s context window holds your entire conversation: every message you send, every file Claude reads, and every command output. This can fill up fast. A single debugging session or codebase exploration might generate and consume tens of thousands of tokens.</p>
+<p>When the context window is getting full, Claude may start &quot;forgetting&quot; earlier instructions or making more mistakes. This is the single most important resource to manage in a Claude Code session.</p>
+<p><strong>What fills the window:</strong></p>
+<ul><li>Every message you send and every reply Claude gives</li><li>Every file Claude reads (even if it only reads part of it)</li><li>Output from every command Claude runs</li><li>Your CLAUDE.md files (loaded at the start of every session)</li></ul>
+<p><strong>What you can do about it:</strong></p>
+<ul><li>Use <code>/clear</code> to reset the context window entirely between unrelated tasks</li><li>Use <code>/compact</code> to summarize a long conversation and continue in a leaner state</li><li>Use subagents to offload research — they run in their own context windows</li><li>Keep your CLAUDE.md short so it doesn&#x27;t eat context at the start of every session</li></ul>
+<p><strong>See also:</strong> <a href="slash-clear.html">/clear</a> · <a href="slash-compact.html">/compact</a> · <a href="claude-md.html">CLAUDE.md</a> · <a href="agents.html">Agents / Subagents</a></p>
+</main>
+</body>
+</html>

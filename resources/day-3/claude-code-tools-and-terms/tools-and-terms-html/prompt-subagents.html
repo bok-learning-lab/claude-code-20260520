@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use subagents for investigation — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="prompt-course-correct.html">← Prev</a> &nbsp;·&nbsp; <a href="prompt-failure-patterns.html">Next →</a></nav>
+<h1>Use subagents for investigation</h1>
+<blockquote><p><strong>Delegate research to subagents so the exploration doesn&#x27;t consume your main context.</strong></p></blockquote>
+<p>Since context is your fundamental constraint, subagents are one of the most powerful tools available. When Claude researches a codebase it reads lots of files — all of which consume your context. Subagents run in separate context windows and report back summaries:</p>
+<pre><code>Use subagents to investigate how our authentication system handles token
+refresh, and whether we have any existing OAuth utilities I should reuse.</code></pre>
+<p>The subagent explores the codebase, reads relevant files, and reports back with findings — without cluttering your main conversation.</p>
+<p>You can also use subagents for verification after Claude implements something:</p>
+<pre><code>use a subagent to review this code for edge cases</code></pre>
+<p><strong>See also:</strong> <a href="agents.html">Agents / Subagents</a> · <a href="context-window.html">Context Window</a></p>
+</main>
+</body>
+</html>

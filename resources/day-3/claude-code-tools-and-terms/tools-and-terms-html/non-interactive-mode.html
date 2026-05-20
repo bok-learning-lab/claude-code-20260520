@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Non-Interactive Mode — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="plugins.html">← Prev</a> &nbsp;·&nbsp; <a href="checkpoints.html">Next →</a></nav>
+<h1>Non-Interactive Mode</h1>
+<blockquote><p><strong>In one line:</strong> Non-interactive mode lets you run Claude from the command line without starting a session — useful for scripts, CI pipelines, and automated workflows.</p></blockquote>
+<p>With <code>claude -p &quot;your prompt&quot;</code>, you can run Claude non-interactively, without a session. This is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow.</p>
+<pre><code class="language-bash"># One-off queries
+claude -p &quot;Explain what this project does&quot;
+
+# Structured output for scripts
+claude -p &quot;List all API endpoints&quot; --output-format json
+
+# Streaming for real-time processing
+claude -p &quot;Analyze this log file&quot; --output-format stream-json</code></pre>
+<p>Add <code>--allowedTools</code> to restrict what Claude can do when running unattended:</p>
+<pre><code class="language-bash">for file in $(cat files.txt); do
+  claude -p &quot;Migrate $file from React to Vue. Return OK or FAIL.&quot; \
+    --allowedTools &quot;Edit,Bash(git commit *)&quot;
+done</code></pre>
+<p>Use <code>--verbose</code> for debugging during development, and turn it off in production.</p>
+</main>
+</body>
+</html>

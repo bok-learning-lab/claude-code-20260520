@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/compact — Claude Code: Tools and Terms</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">← Index</a> &nbsp;·&nbsp; <a href="slash-clear.html">← Prev</a> &nbsp;·&nbsp; <a href="slash-memory.html">Next →</a></nav>
+<h1>/compact</h1>
+<blockquote><p><strong>In one line:</strong> <code>/compact</code> summarizes the current conversation to free context space while keeping the session going — unlike <code>/clear</code>, you don&#x27;t lose the thread.</p></blockquote>
+<p>Running <code>/compact</code> automatically summarizes conversation history, preserving important code and decisions while freeing space. Use it when:</p>
+<ul><li>You&#x27;re in the middle of a task and don&#x27;t want to start over</li><li>The context is getting long but the work is ongoing</li><li>You want to carry only the essentials forward</li></ul>
+<p>You can add a hint: <code>/compact Focus on the API changes</code> — Claude will emphasize those details in the summary.</p>
+<p>For more control, use <code>Esc + Esc</code> or <code>/rewind</code>, select a message checkpoint, and choose <strong>Summarize from here</strong> or <strong>Summarize up to here</strong>:</p>
+<ul><li><em>Summarize from here</em> — condenses messages from that point forward while keeping earlier context intact</li><li><em>Summarize up to here</em> — condenses earlier messages while keeping recent ones in full</li></ul>
+<p><strong>Customize compaction in CLAUDE.md</strong> with instructions like <code>&quot;When compacting, always preserve the full list of modified files and any test commands&quot;</code> — this ensures critical context survives summarization.</p>
+<p><strong>Project-root CLAUDE.md survives compaction:</strong> after <code>/compact</code>, Claude re-reads it from disk and re-injects it. Nested CLAUDE.md files in subdirectories are not re-injected automatically — they reload the next time Claude reads a file in that subdirectory.</p>
+<p><strong>See also:</strong> <a href="slash-clear.html">/clear</a> · <a href="context-window.html">Context Window</a> · <a href="checkpoints.html">Checkpoints</a></p>
+</main>
+</body>
+</html>
